@@ -1,0 +1,16 @@
+page.jsInline.98987 = COA
+page.jsInline.98987{
+	10 = TEXT
+	10.typolink.parameter = #
+	10.typolink.additionalParams = &eID=tx_ajaxlogin
+	10.typolink.returnLast = url
+	10.wrap = baseUrl: '|'
+	
+	20 = TEXT
+	20.value = #c94
+	20.wrap = ,placeholder: '|'
+	
+	wrap = var tx_ajaxlogin = {|};
+}
+
+page.includeJSFooter.tx-ajaxlogin = EXT:ajaxlogin/Resources/Public/JavaScript/Ajaxlogin.js
