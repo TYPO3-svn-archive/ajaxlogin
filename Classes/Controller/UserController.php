@@ -39,8 +39,10 @@ class Tx_Ajaxlogin_Controller_UserController {
 			
 		if($this->user->isLoggedIn()) {
 			$result['status'] = true;
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('logout');
 		} else {
 			$result['status'] = false;
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('login');
 		}
 		
 		
@@ -52,9 +54,11 @@ class Tx_Ajaxlogin_Controller_UserController {
 			
 		if($this->user->isLoggedIn()) {
 			$result['status'] = true;
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('logout');
 		} else {
 			$result['status'] = false;
 			$result['message'] = Tx_Ajaxlogin_Utility_Localization::translate('ll_error_message');
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('login');
 		}
 		
 		
@@ -65,7 +69,8 @@ class Tx_Ajaxlogin_Controller_UserController {
 		$this->user->getUserObject()->logoff();
 		
 		return array(
-			'status' => true
+			'status' => true,
+			'statuslabel' => Tx_Ajaxlogin_Utility_Localization::translate('login')
 		);
 	}
 }

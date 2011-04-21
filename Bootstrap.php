@@ -8,6 +8,9 @@ switch($requestParameters['controller']) {
 	case 'LoginForm':
 		$controller = t3lib_div::makeInstance('Tx_Ajaxlogin_Controller_LoginFormController');
 	break;
+	case 'Password':
+		$controller = t3lib_div::makeInstance('Tx_Ajaxlogin_Controller_PasswordController');
+	break;
 	case 'User':
 		$controller = t3lib_div::makeInstance('Tx_Ajaxlogin_Controller_UserController');
 	break;

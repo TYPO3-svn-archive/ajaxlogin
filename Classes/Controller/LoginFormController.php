@@ -9,7 +9,6 @@ class Tx_Ajaxlogin_Controller_LoginFormController {
 		
 		$markers = array(
 			'###FORMID###' => 'tx-ajaxlogin-' . time(),
-			'###STORAGE_PID###' => 11,
 			'###HIDDENFIELDS###' => '',
 			'###USERNAME_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('username'),
 			'###PASSWORD_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('password'),

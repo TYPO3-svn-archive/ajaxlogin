@@ -28,10 +28,12 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'author_company' => 'T3O',
-	'version' => '0.0.1',
+	'author_company' => 'MaxServ B.V.',
+	'version' => '0.0.2',
 	'constraints' => array(
 		'depends' => array(
+			'extbase' => '1.3.0-0.0.0',
+			'felogin' => '1.3.1-0.0.0'
 		),
 		'conflicts' => array(
 		),
