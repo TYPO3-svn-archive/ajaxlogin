@@ -18,7 +18,9 @@ class Tx_Ajaxlogin_Controller_UserController {
 				'###FORMID###' => 'tx-ajaxlogin-' . time(),
 				'###STATUS_HEADER###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_header'),
 				'###STATUS_MESSAGE###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_message'),
-				'###LOGOUT_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('logout')
+				'###LOGOUT_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('logout'),
+				'###USERNAME###' => $this->user->getUsername(),
+				'###USER_FULLNAME###' => $this->user->getName()
 			);
 		
 			$result = array(
@@ -72,6 +74,25 @@ class Tx_Ajaxlogin_Controller_UserController {
 			'status' => true,
 			'statuslabel' => Tx_Ajaxlogin_Utility_Localization::translate('login')
 		);
+	}
+	
+	public function newAction() {
+		$result = array();
+		
+		$content = file_get_contents(t3lib_extMgm::extPath('ajaxlogin') . 'Resources/Private/Templates/User/new.html');
+			
+		$markers = array(
+			'###FORMID###' => 'tx-ajaxlogin-' . time(),
+			'###HEADER###' => Tx_Ajaxlogin_Utility_Localization::translate('signup'),
+			'###MESSAGE###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_message'),
+			'###SIGNUP_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('signup')
+		);
+	
+		$result['html'] = t3lib_parsehtml::substituteMarkerArray($content, $markers);
+		
+		$result['formid'] = $markers['###FORMID###'];
+		
+		return $result;
 	}
 }
 

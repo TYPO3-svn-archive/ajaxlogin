@@ -41,6 +41,7 @@ jQuery(document).ready(function() {
 					
 					$('#' + response.Ajaxlogin.signupid).click(function(event) {
 						event.preventDefault();
+						Ajaxlogin.showSignupForm();
 					});
 				}
 			});
@@ -78,6 +79,23 @@ jQuery(document).ready(function() {
 					} else {
 						$('#tx-ajaxlogin-notice').html(response.Ajaxlogin.message);
 					}
+				}
+			});
+		},
+		showSignupForm: function() {
+			$.ajax({
+				url: tx_ajaxlogin.baseUrl,
+				cache: false,
+				data: {
+					'tx_ajaxlogin[action]': 'new',
+					'tx_ajaxlogin[controller]': 'User'
+				},
+				success: function(response) {
+					$(tx_ajaxlogin.placeholder).html(response.Ajaxlogin.html);
+					
+					$(response.Ajaxlogin.formid).submit(function(event) {
+						event.preventDefault();
+					});
 				}
 			});
 		},
