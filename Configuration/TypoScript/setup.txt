@@ -43,7 +43,7 @@ page.jsInline.98987{
 	30.wrap = ,storagePid:|
 	
 	40 = TEXT
-	40.value = #ajaxlogin-status
+	40.value = #login-status
 	40.wrap = ,statusLabel:'|'
 	
 	50 < plugin.tx_ajaxlogin.minimumPasswordLength

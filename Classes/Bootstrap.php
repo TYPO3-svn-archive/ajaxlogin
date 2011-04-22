@@ -21,7 +21,8 @@ class Tx_Ajaxlogin_Bootstrap {
 			$passwordController = t3lib_div::makeInstance('Tx_Ajaxlogin_Controller_PasswordController');			
 			$content = $passwordController->changeAction($requestParameters['forgot']);
 		} else if(!empty($GLOBALS['TSFE']->fe_user->user)) {
-			$content = 'edit your profile';
+			$userController = t3lib_div::makeInstance('Tx_Ajaxlogin_Controller_UserController');
+			$content = $userController->editAction();
 		} else {
 			$content = 'can\'t help you';
 		}

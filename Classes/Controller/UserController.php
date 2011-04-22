@@ -19,7 +19,17 @@ class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 	
 	public function showAction() {
 		if($this->user->isLoggedIn()) {
+			$setup = Tx_Ajaxlogin_Utility_TypoScript::parse(Tx_Ajaxlogin_Utility_TypoScript::getSetup());
 			$content = file_get_contents(t3lib_extMgm::extPath('ajaxlogin') . 'Resources/Private/Templates/User/show.html');
+			
+			$link = $GLOBALS['TSFE']->tmpl->linkData(
+				array('uid' => $setup['profilePid']), // trick the ->linkData() method by sending a simple array with the uid instead of a complete page record
+				'',
+				false,
+				'',
+				array(),
+				''
+			);
 			
 			$markers = array(
 				'###FORMID###' => 'tx-ajaxlogin-' . time(),
@@ -27,7 +37,9 @@ class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 				'###STATUS_MESSAGE###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_message'),
 				'###LOGOUT_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('logout'),
 				'###USERNAME###' => $this->user->getUsername(),
-				'###USER_FULLNAME###' => $this->user->getName()
+				'###USER_FULLNAME###' => $this->user->getName(),
+				'###PROFILE_URL###' => t3lib_div::getIndpEnv('TYPO3_SITE_URL') . $link['totalURL'],
+				'###PROFILE_LABEL###' => 'Manage your account'
 			);
 		
 			$result = array(
@@ -108,6 +120,26 @@ class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 		$result['returnid'] = $markers['###RETURNID###'];
 		
 		return $result;
+	}
+	
+	public function editAction() {
+		$content = file_get_contents(t3lib_extMgm::extPath('ajaxlogin') . 'Resources/Private/Templates/User/edit.html');
+			
+		$markers = array(
+			'###FORMID###' => 'tx-ajaxlogin-' . time(),
+			'###HEADER###' => Tx_Ajaxlogin_Utility_Localization::translate('signup'),
+			'###MESSAGE###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_message'),
+			'###SIGNUP_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('signup'),
+			'###NAME_LABEL###' => 'Name:',
+			'###USERNAME_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('username'),
+			'###EMAIL_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('your_email'),
+			'###PASSWORD_LABEL1###' => Tx_Ajaxlogin_Utility_Localization::translate('newpassword_label1'),
+			'###PASSWORD_LABEL2###' => Tx_Ajaxlogin_Utility_Localization::translate('newpassword_label2'),
+			'###RETURNID###' => 'tx-ajaxlogin-return-' . time(),
+			'###RETURN_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_forgot_header_backToLogin'),
+		);
+	
+		return t3lib_parsehtml::substituteMarkerArray($content, $markers);
 	}
 	
 	public function createAction() {
