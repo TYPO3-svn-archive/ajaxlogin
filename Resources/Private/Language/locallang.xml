@@ -27,6 +27,7 @@ Another possibility is that cookies might be disabled in your web browser.</labe
 			<label index="login">Login</label>
 			<label index="signup">Sign Up</label>
 			<label index="logout">Logout</label>
+			<label index="status-loggedin">My account</label>
 			<label index="send_password">Send password</label>
 			<label index="reset_password">Reset Password</label>
 			<label index="ll_change_password_header">Change your password</label>

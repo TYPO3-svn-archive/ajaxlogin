@@ -60,7 +60,7 @@ class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 			
 		if($this->user->isLoggedIn()) {
 			$result['status'] = true;
-			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('logout');
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('status-loggedin');
 		} else {
 			$result['status'] = false;
 			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('login');
@@ -75,7 +75,7 @@ class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 			
 		if($this->user->isLoggedIn()) {
 			$result['status'] = true;
-			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('logout');
+			$result['statuslabel'] = Tx_Ajaxlogin_Utility_Localization::translate('status-loggedin');
 		} else {
 			$result['status'] = false;
 			$result['message'] = Tx_Ajaxlogin_Utility_Localization::translate('ll_error_message');
