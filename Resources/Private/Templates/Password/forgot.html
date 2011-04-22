@@ -2,15 +2,19 @@
 	<h5>###HEADER###</h5>
 	<p>###MESSAGE###</p>
 	<div id="tx-ajaxlogin-notice"></div>
-	<div>
+	<div class="b-form-row">
 		<label for="tx-ajaxlogin-email">###DATA_LABEL###</label>
-		<input type="text" name="tx_ajaxlogin[email]" id="tx-ajaxlogin-email" />
+		<div class="b-form-inputs">
+			<input type="text" name="tx_ajaxlogin[email]" id="tx-ajaxlogin-email" />
+		</div>
 	</div>
-	<div>
-		<input type="submit" name="submit" value="###SEND_PASSWORD###" />
-	 </div>
-	 
-	 <a href="#" id="###RETURNID###">
-	 	###RETURN_LABEL###
-	 </a>
+	
+	<div class="b-form-row">
+		<div class="login-action-links">
+			<a href="#" id="###RETURNID###">
+				###RETURN_LABEL###
+			</a>
+		</div>
+		<button type="submit" name="submit" value="###SEND_PASSWORD###" class="bu bu-mini">###SEND_PASSWORD###</button>	
+	</div>
 </form>

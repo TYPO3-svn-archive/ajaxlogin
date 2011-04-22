@@ -1,13 +1,20 @@
 <?php
-
-class Tx_Ajaxlogin_Controller_UserController {
+// for now we pretend extending felogin_pi1 to use some hooks
+require_once(t3lib_extMgm::extPath('felogin') . 'pi1/class.tx_felogin_pi1.php');
+class Tx_Ajaxlogin_Controller_UserController extends tx_felogin_pi1{
 	/**
 	 * @var Tx_Ajaxlogin_Domain_Model_User
 	 */
 	protected $user;
 	
+	/**
+	 * @var Tx_Ajaxlogin_Domain_Repository_UserRepository
+	 */
+	protected $userRepository;
+	
 	public function __construct() {
 		$this->user = t3lib_div::makeInstance('Tx_Ajaxlogin_Domain_Model_User', tslib_eidtools::initFeUser());
+		$this->userRepository = t3lib_div::makeInstance('Tx_Ajaxlogin_Domain_Repository_UserRepository');
 	}
 	
 	public function showAction() {
@@ -85,12 +92,86 @@ class Tx_Ajaxlogin_Controller_UserController {
 			'###FORMID###' => 'tx-ajaxlogin-' . time(),
 			'###HEADER###' => Tx_Ajaxlogin_Utility_Localization::translate('signup'),
 			'###MESSAGE###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_status_message'),
-			'###SIGNUP_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('signup')
+			'###SIGNUP_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('signup'),
+			'###NAME_LABEL###' => 'Name:',
+			'###USERNAME_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('username'),
+			'###EMAIL_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('your_email'),
+			'###PASSWORD_LABEL1###' => Tx_Ajaxlogin_Utility_Localization::translate('newpassword_label1'),
+			'###PASSWORD_LABEL2###' => Tx_Ajaxlogin_Utility_Localization::translate('newpassword_label2'),
+			'###RETURNID###' => 'tx-ajaxlogin-return-' . time(),
+			'###RETURN_LABEL###' => Tx_Ajaxlogin_Utility_Localization::translate('ll_forgot_header_backToLogin'),
 		);
 	
 		$result['html'] = t3lib_parsehtml::substituteMarkerArray($content, $markers);
 		
 		$result['formid'] = $markers['###FORMID###'];
+		$result['returnid'] = $markers['###RETURNID###'];
+		
+		return $result;
+	}
+	
+	public function createAction() {
+		$setup = Tx_Ajaxlogin_Utility_TypoScript::parse(Tx_Ajaxlogin_Utility_TypoScript::getSetup());
+		$data = t3lib_div::_GP('tx_ajaxlogin');
+		$result = array();
+		
+		$result['status'] = false;
+		
+		// do some validation
+		if(empty($data['name'])) {
+			$result['message'] = 'No name given';
+			return $result;
+		}
+		if(empty($data['username'])) {
+			$result['message'] = 'No username given';
+			return $result;
+		}
+		if(!t3lib_div::validEmail($data['email'])) {
+			$result['message'] = 'No valid e-mailaddress given';
+			return $result;
+		}
+		if($data['pass1'] != $data['pass1']) {
+			$result['message'] = Tx_Ajaxlogin_Utility_Localization::translate('ll_change_password_notequal_message');
+			return $result; // return because we don't need to do anything more
+		}		
+		if(strlen($data['pass1']) < $setup['minimumPasswordLength']) {
+			$result['message'] = Tx_Ajaxlogin_Utility_Localization::translate('ll_change_password_tooshort_message');
+			return $result; // return because we don't need to do anything more
+		}
+		
+		// make sure another user with this name doesn't already exists
+		$user = $this->userRepository->findOneByUsernameOrEmail($data['username']);
+		
+		if($user) {
+			$result['message'] = 'The chosen username is already in use';
+			return $result;
+		}
+		
+		$newPass = $data['pass1'];
+
+		if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['password_changed']) {
+			$_params = array(
+				'user' => $user,
+				'newPassword' => $newPass,
+			);
+			foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['password_changed'] as $_funcRef) {
+				if ($_funcRef) {
+					t3lib_div::callUserFunction($_funcRef, $_params, $this);
+				}
+			}
+			$newPass = $_params['newPassword'];
+		}
+		
+		$this->userRepository->insert(array(
+			'username' => $data['username'],
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'password' => $newPass,
+			'pid' => $setup['storagePid']
+		));
+		
+		$result['status'] = true;
+		$result['message'] = Tx_Ajaxlogin_Utility_Localization::translate('ll_change_password_done_message');
 		
 		return $result;
 	}

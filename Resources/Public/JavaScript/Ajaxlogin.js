@@ -93,8 +93,32 @@ jQuery(document).ready(function() {
 				success: function(response) {
 					$(tx_ajaxlogin.placeholder).html(response.Ajaxlogin.html);
 					
-					$(response.Ajaxlogin.formid).submit(function(event) {
+					$('#' + response.Ajaxlogin.formid).submit(function(event) {
 						event.preventDefault();
+						
+						var input = {};
+						
+						$('#' + response.Ajaxlogin.formid).find('input').each(function() {
+							input[$(this).attr('name')] = $(this).val();
+						});
+						
+						$.ajax({
+							url: tx_ajaxlogin.baseUrl,
+							cache: false,
+							type: 'POST',
+							data: $.extend({
+								'tx_ajaxlogin[action]': 'create',
+								'tx_ajaxlogin[controller]': 'User'
+							}, input),
+							success: function(response) {
+								$('#tx-ajaxlogin-notice').html(response.Ajaxlogin.message);
+							}
+						});
+					});
+					
+					$('#' + response.Ajaxlogin.returnid).click(function(event) {
+						event.preventDefault();
+						Ajaxlogin.showLoginForm();
 					});
 				}
 			});

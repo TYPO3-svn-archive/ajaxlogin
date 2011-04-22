@@ -1,7 +1,48 @@
 <form id="###FORMID###" action="" method="post">
 	<h5>###HEADER###</h5>
 	<p>###MESSAGE###</p>
-	<div>
-		<input type="submit" name="submit" value="###SIGNUP_LABEL###" />
-	 </div>
+	<div id="tx-ajaxlogin-notice"></div>
+	
+	<div class="b-form-row">
+		<label for="tx-ajaxlogin-name">###NAME_LABEL###</label>
+		<div class="b-form-inputs">
+			<input type="text" id="tx-ajaxlogin-name" name="tx_ajaxlogin[name]" />
+		</div>
+	</div>	
+	<div class="b-form-row">
+		<label for="tx-ajaxlogin-email">###EMAIL_LABEL###</label>
+		<div class="b-form-inputs">
+			<input type="text" id="tx-ajaxlogin-email" name="tx_ajaxlogin[email]" />
+		</div>
+	</div>
+	
+	<div class="b-form-row">
+		<label for="tx-ajaxlogin-username">###USERNAME_LABEL###</label>
+		<div class="b-form-inputs">
+			<input type="text" id="tx-ajaxlogin-username" name="tx_ajaxlogin[username]" />
+		</div>
+	</div>
+	
+	<div class="b-form-row">
+		<label for="tx-ajaxlogin-pass1">###PASSWORD_LABEL1###</label>
+		<div class="b-form-inputs">
+			<input type="password" id="tx-ajaxlogin-pass1" name="tx_ajaxlogin[pass1]" />
+		</div>
+	</div>
+	
+	<div class="b-form-row">
+		<label for="tx-ajaxlogin-pass2">###PASSWORD_LABEL2###</label>
+		<div class="b-form-inputs">
+			<input type="password" id="tx-ajaxlogin-pass2" name="tx_ajaxlogin[pass2]" />
+		</div>
+	</div>
+	
+	<div class="b-form-row">
+		<div class="login-action-links">
+			<a href="#" id="###RETURNID###">
+				###RETURN_LABEL###
+			</a>
+		</div>
+		<button type="submit" name="submit" value="###SIGNUP_LABEL###" class="bu bu-mini">###SIGNUP_LABEL###</button>	
+	</div>
 </form>

@@ -44,6 +44,11 @@ class Tx_Ajaxlogin_Domain_Repository_UserRepository implements t3lib_Singleton {
 		unset($fields['username']); // make sure the username isn't changed
 		return $GLOBALS['TYPO3_DB']->exec_UPDATEquery('fe_users', 'uid = ' . intval($uid), $fields);
 	}
+	
+	public function insert($fields) {
+		unset($fields['uid']);
+		return $GLOBALS['TYPO3_DB']->exec_INSERTquery('fe_users', $fields);
+	}
 
 }
 
