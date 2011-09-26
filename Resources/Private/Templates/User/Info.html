@@ -1,0 +1,22 @@
+{namespace t3oajaxlogin=Tx_T3oAjaxlogin_ViewHelpers}
+
+<f:layout name="Widget" />
+
+        <f:section name="content">
+
+                <!-- ajaxlogin flyout content -->
+
+                    <div class="ajaxlogin-userimage">
+                        <t3oajaxlogin:currentUserImage width="60" height="78c" alt="" />
+                    </div>
+                    <div class="ajaxlogin-statusbox">
+                        <div class="ajaxlogin-userstatus">You are logged in as:</div>
+                        <div class="ajaxlogin-user"><strong>{user.name}</strong></div>
+                        <div class="ajaxlogin-manageaccount">
+                            <f:link.page pageUid="{settings.actionPid.edit}">Manage your account</f:link.page>
+                        </div>
+                        <div class="ajaxlogin-logout bu dark-grey"><a rel="tx_ajaxlogin[logout]" href="#">Logout</a>
+                        </div>
+                    </div>
+
+        </f:section>

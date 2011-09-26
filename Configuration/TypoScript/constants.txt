@@ -1,0 +1,36 @@
+plugin.tx_ajaxlogin {
+    settings {
+    	widgetTypeNum = 98987
+    	defaultUserGroups = 1
+    	validation {
+    		User {
+    			username = /^.{1,}$/
+    			password = /^.{8,}$/
+    		}
+    	}
+    	notificationMail {
+    		from = TYPO3.org <info@typo3.org>
+    		strftimeFormat = %c
+    	}
+    	ajaxPid = 0
+    	actionPid {
+    		login = 0
+    		show = 0
+    		edit = 0
+    		editPassword = 0
+    		closeAccount = 0
+    	}
+    }
+    view {
+         # cat=plugin.tx_ajaxlogin/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ajaxlogin/Resources/Private/Templates/
+         # cat=plugin.tx_ajaxlogin/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ajaxlogin/Resources/Private/Partials/
+         # cat=plugin.tx_ajaxlogin/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ajaxlogin/Resources/Private/Layouts/
+    }
+    persistence {
+         # cat=plugin.tx_ajaxlogin//a; type=int+; label=Default storage PID
+        storagePid = 11
+    }
+}

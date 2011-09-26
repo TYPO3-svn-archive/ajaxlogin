@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>Texts for plugin 'ajaxlogin'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="user.username">Username</label>
+			<label index="user.password">Password</label>
+			<label index="user.name">Name</label>
+			<label index="user.email">E-mail</label>
+			<label index="user.address">Address</label>
+			<label index="user.zip">Zipcode</label>
+			<label index="user.city">City</label>
+			<label index="user.country">Country</label>
+			<label index="user.title">Title</label>
+			<label index="user.company">Company</label>
+			<label index="user.telephone">Telephone</label>
+			<label index="user.fax">Fax</label>
+			<label index="user.www">Homepage</label>
+			
+			<label index="password">Password</label>
+			<label index="password.new">New password</label>
+			<label index="password.check">New password (check)</label>
+			<label index="password.repeat">Repeat</label>
+
+			<label index="update_user">Update account</label>
+			<label index="signup_user">Sign up!</label>
+			<label index="login_user">To login form</label>
+			<label index="update_password">Update password</label>
+			<label index="forgot_password">Forgot password?</label>
+			<label index="recover_password">Reset password</label>
+			
+			<label index="button_login">Login</label>
+			<label index="button_signup">Sign up!</label>
+			
+			<label index="authentication_failed">Login or password incorrect.</label>
+			<label index="duplicate_username">The selected username is already in use</label>
+			<label index="signup_successful">Sign-up successful! You were logged in.</label>
+			<label index="login_successful">Welcome back! You are now logged in.</label>
+			<label index="logout_successful">You are now logged out.</label>
+
+			<label index="username_or_email">Username or e-mail address</label>
+			<label index="user_notfound">No user with this username or e-mail address (%s) was found</label>
+			
+			<label index="password_invalid">The given password is not valid</label>
+			<label index="password_updated">Your password has been updated, the next time you sign in use your new password</label>
+			<label index="password_nomatch">The passwords do not match</label>
+			
+			<label index="status_authenticated">My account</label>
+			<label index="status_unauthorized">Login</label>
+			
+			<label index="resetpassword_notification_subject">Reset your password for %s</label>
+			<label index="resetpassword_notification_message">Dear %s,
+
+This email was sent in response to your request to reset your password. Please click on the link below. 
+%s
+
+For security reasons, this link is only active until %s. If you do not visit the link before then, you will need to repeat the password reset steps.</label>
+			<label index="resetpassword_notification_sent">An email has been sent to the known email address belonging to your account with further instructions to change your password</label>
+		</languageKey>
+	</data>
+</T3locallang>
